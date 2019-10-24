@@ -1,0 +1,128 @@
+<div class="topStyle"> 
+<img src="assets/logo.png" ALT="some text" WIDTH=130 HEIGHT=120>
+</div>
+<div class="btn-group" >
+  
+  <button (click)="doStuff()">Categories</button>
+  <button (click)="doStuff2()">Difficulty Level</button>
+  <button (click)="doStuff3()">Date Aired</button>
+  <button (click)="doStuff4()">Random</button>
+
+
+
+</div>
+
+
+<div>  
+  <div *ngIf="showRandom" >
+      <button (click)="fetchRandom()" >SEARCH</button>
+     
+    <ul> 
+        <li *ngFor="let ran of randomResults; let i = index">
+
+          <div class="card">
+            <img src="assets/logo.png" alt="Avatar" style="width:3%">
+            <div class="container">
+              <p>{{ran.question}}</p>
+              <h4><b>Ans: {{ran.answer}}, Value: {{ran.value}} </b></h4>
+            </div>
+          </div>
+
+        </li>
+    </ul>
+  
+  </div>
+</div>
+
+
+<div>  
+  <div *ngIf="showCat" class="example" >
+   
+      <input id = "searchCat" type="text" placeholder="Search Keyword..." >
+      <button (click)="fetchData()" >SEARCH</button>
+     
+   
+
+    <ul> 
+        <li *ngFor="let cat of categories.clues; let i = index">
+            {{cat.question}},
+            {{cat.answer}},
+            {{cat.value}}
+
+        </li>
+    </ul>
+  
+  </div>
+
+
+  
+  <div *ngIf="showDiff" class="slidecontainer">
+      <select id= "difficulty">
+          <option value="0">--Select Difficulty Level--</option>
+          <option value="100">100</option>
+          <option value="200">200</option>
+          <option value="300">300</option>
+          <option value="400">400</option>
+          <option value="500">500</option>
+          <option value="600">600</option>
+          <option value="700">700</option>
+          <option value="800">800</option>
+          <option value="900">900</option>
+          <option value="1000">1000</option>
+        </select>
+        <button (click)="fetchDiff()"  type="button">SEARCH</button>
+
+      
+        <ul> 
+            <li *ngFor="let diff of diffResults; let i = index">
+
+                <div class="card">
+                    <img src="assets/logo.png" alt="Avatar" style="width:3%">
+                    <div class="container">
+                      <p>{{diff.question}}</p>
+                      <h4><b>Ans: {{diff.answer}}, Value: {{diff.value}} </b></h4>
+                      
+                  </div>
+                  </div>
+                
+             
+             <!--
+               {{diff.question}}
+               {diff.answer}},
+             {{diff.value}},
+             {{diff.airdate}}-->
+              
+                
+            </li>
+          </ul>
+
+    </div>
+
+  
+
+    <div *ngIf="showDate" class="slidecontainer">
+
+       
+          <mat-form-field>
+          <input id= "date" matInput [matDatepicker]="picker" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button (click)="fetchDate()"  type="button">SEARCH</button>
+     
+        <ul> 
+            <li *ngFor="let d of dateResults; let i = index">
+               
+             {{d.question}} ,
+             {{d.answer}},
+             {{d.value}},
+             {{d.airdate}}
+                
+            </li>
+          </ul>
+        
+      </div>
+
+      
+       
+</div>
