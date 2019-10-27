@@ -1,110 +1,138 @@
 import { Component } from '@angular/core';
 import { AppService } from './app.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 
+
+
 export class AppComponent {
-  categories;
-  constructor(private appService: AppService){ }
+  map = new Map();
+    Results;
+    constructor(private appService: AppService){ 
+    
+      this.appService.fetchAllCat().toPromise()
+         .then((Results)=>
+         {
+          for (let i = 0; i < 100; i++)  {
+           this.Results = Results;
+            var key = this.Results[i].title  
+            var value =  this.Results[i].id 
+            this.map.set(key, value); 
+          }
+                  
+         })      
+         console.log(this.map);
+         console.log(this.map.size);
+        
+     console.log(this.map.has("narnia"));
+   }
+
+   
+  newcatResults;
+  catResults;
+
   fetchData(){
     this.appService.fetchData().toPromise()
-        .then((categories)=>
+        .then((catResults)=>
     {
-      this.categories = categories;
-      var inputCat = document.getElementById("searchCat");
-      console.log(this.categories);
-      for (const cat of this.categories){
-        console.log(cat);
-    }   
+      this.catResults = catResults;
+      this.newcatResults = (this.catResults).clues.slice(0, 10);
         })
   }
 
+  newdiffResults
   diffResults
   fetchDiff(){
     this.appService.fetchDiff().toPromise()
         .then((diffResults)=>
     {
-      this.diffResults= diffResults;
-      var inputDif = document.getElementById("difficulty").value;   
-      console.log(inputDif);
-      for (const diff of this.diffResults){
-        console.log(diff);
-    }   
+      this.diffResults= diffResults;  
+      this.newdiffResults = (this.diffResults).slice(0, 10);
         })
   }
 
+  newdateResults;
   dateResults
   fetchDate(){
     this.appService.fetchDate().toPromise()
         .then((dateResults)=>
     {
-      this.dateResults = dateResults;
-      var inputdate = document.getElementById("date");   
-      console.log(inputdate);
-      for (const d of this.dateResults){
-        console.log(d);
-    }   
+      this.dateResults = dateResults; 
+      this.newdateResults = (this.dateResults).slice(0, 10);
         })
   }
 
+  newranResults;
   randomResults
   fetchRandom(){
     this.appService.fetchRandom().toPromise()
         .then((randomResults)=>
     {
       this.randomResults = randomResults;
-      var inputnum = document.getElementById("date");   
-      console.log(inputnum);
-      for (const r of this.randomResults){
-        console.log(r);
-    }   
+      this.newranResults= (this.randomResults).slice(0, 10);
         })
   }
-  
-  
 
+  PageEventran(event){
+    this.newranResults = this.randomResults.slice(0, event.pageSize);
+  }
+
+  PageEventdate(event){
+    this.newdateResults = this.dateResults.slice(0, event.pageSize);
+      
+    }
+
+  PageEventdiff(event){
+    this.newdiffResults = this.diffResults.slice(0, event.pageSize);
+      
+    }
+
+  PageEventcat(event){
+    this.newcatResults = this.catResults.clues.slice(0, event.pageSize);
+      
+    }
+  
+    
   title = 'JEOOOPARDY';
   showCat = true;
   showDiff = false;
   showDate = false;
-  showRandom = false
+  showRandom = false;
+
+
   
-  doStuff() {
+  openCat() {
     this.showCat = true;
     this.showDiff = false
     this.showDate = false;
-    this.showRandom = false;
-    
+    this.showRandom = false; 
   }
-  doStuff2() {
+
+  openDiff() {
     this.showDiff = true;
     this.showCat = false;
     this.showDate = false;
     this.showRandom = false;
-    
   
   }
- doStuff3(){
+
+ openDate(){
     this.showDate = true;
     this.showDiff = false;
     this.showCat = false;
-    this.showRandom = false;
-  
-}
-doStuff4(){
-  this.showRandom = true;
-  this.showDate = false;
-  this.showDiff = false;
-  this.showCat = false;
-
+    this.showRandom = false;  
 }
 
-
-  
+  openRan(){
+    this.showRandom = true;
+    this.showDate = false;
+    this.showDiff = false;
+    this.showCat = false;
 }
 
-
+}

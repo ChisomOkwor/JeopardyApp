@@ -1,128 +1,133 @@
 <div class="topStyle"> 
-<img src="assets/logo.png" ALT="some text" WIDTH=130 HEIGHT=120>
+<img src="assets/logo.png" ALT="some text" WIDTH=100 HEIGHT=100>
+<marquee  style="color: rgb(105, 63, 101)"  behavior="scroll" direction="left"> Smart Trivia gives you a choice! </marquee>
 </div>
+
 <div class="btn-group" >
   
-  <button (click)="doStuff()">Categories</button>
-  <button (click)="doStuff2()">Difficulty Level</button>
-  <button (click)="doStuff3()">Date Aired</button>
-  <button (click)="doStuff4()">Random</button>
-
-
-
+  <button (click)="openCat()">Categories</button>
+  <button (click)="openDiff()">Difficulty Level</button>
+  <button (click)="openDate()">Date Aired</button>
+  <button (click)="openRan()">Random</button>
 </div>
 
-
-<div>  
-  <div *ngIf="showRandom" >
-      <button (click)="fetchRandom()" >SEARCH</button>
-     
-    <ul> 
-        <li *ngFor="let ran of randomResults; let i = index">
-
-          <div class="card">
-            <img src="assets/logo.png" alt="Avatar" style="width:3%">
-            <div class="container">
-              <p>{{ran.question}}</p>
-              <h4><b>Ans: {{ran.answer}}, Value: {{ran.value}} </b></h4>
-            </div>
-          </div>
-
-        </li>
-    </ul>
-  
-  </div>
-</div>
-
-
-<div>  
   <div *ngIf="showCat" class="example" >
-   
-      <input id = "searchCat" type="text" placeholder="Search Keyword..." >
-      <button (click)="fetchData()" >SEARCH</button>
-     
-   
-
+    <p class="about" ><small> Search Categories</small></p>
+      <input id = "searchCat" class="inputBar" type="text" placeholder="Search Keyword..." >
+      <button  class="smallbutton" (click)="fetchData()" >SEARCH</button>
     <ul> 
-        <li *ngFor="let cat of categories.clues; let i = index">
-            {{cat.question}},
-            {{cat.answer}},
-            {{cat.value}}
+        <li *ngFor="let cat of newcatResults; let i = index">
 
+            <div class="card">
+                <img src="assets/logo.png" alt="Avatar" style="width:3%">
+                <div class="container">
+                  <p> {{cat.question}},</p>
+                  <h4><b>Ans: {{cat.answer}}, Value: {{cat.value}}, </b></h4>
+                </div>
+              </div>
         </li>
     </ul>
-  
-  </div>
 
-
+    <div class="paginator">
+    <mat-paginator [length]="1"
+     (page)="PageEventcat($event)"
+     [pageSize]="10"
+     [pageSizeOptions]="[5, 10, 25, 50, 100]">
+  </mat-paginator>
+</div>
+</div>
   
-  <div *ngIf="showDiff" class="slidecontainer">
-      <select id= "difficulty">
-          <option value="0">--Select Difficulty Level--</option>
-          <option value="100">100</option>
-          <option value="200">200</option>
-          <option value="300">300</option>
-          <option value="400">400</option>
-          <option value="500">500</option>
-          <option value="600">600</option>
-          <option value="700">700</option>
-          <option value="800">800</option>
-          <option value="900">900</option>
-          <option value="1000">1000</option>
+  <div *ngIf="showDiff">
+      <p class="about"><small> Search by Difficulty</small></p>
+      <select  id= "difficulty" class="select-css">
+          <option value="0">--Select Level--</option>
+          <option value="100">Level 1</option>
+          <option value="200">Level 2</option>
+          <option value="300">Level 3</option>
+          <option value="400">Level 4</option>
+          <option value="500">Level 5</option>
+          <option value="600">Level 6</option>
+          <option value="800">Level 8</option>
+          <option value="1000">Level 10</option>
         </select>
-        <button (click)="fetchDiff()"  type="button">SEARCH</button>
-
+        <button  class="smallbutton" (click)="fetchDiff()"  type="button">SEARCH</button>
       
         <ul> 
-            <li *ngFor="let diff of diffResults; let i = index">
+            <li *ngFor="let diff of newdiffResults; let i = index">
 
                 <div class="card">
                     <img src="assets/logo.png" alt="Avatar" style="width:3%">
                     <div class="container">
                       <p>{{diff.question}}</p>
                       <h4><b>Ans: {{diff.answer}}, Value: {{diff.value}} </b></h4>
-                      
                   </div>
                   </div>
-                
-             
-             <!--
-               {{diff.question}}
-               {diff.answer}},
-             {{diff.value}},
-             {{diff.airdate}}-->
-              
-                
+      
             </li>
           </ul>
-
-    </div>
-
-  
+          <div class="paginator">
+          <mat-paginator [length]="1"
+          (page)="PageEventdiff($event)"
+          [pageSize]="10"
+          [pageSizeOptions]="[5, 10, 25, 50, 100]">
+       </mat-paginator>
+      </div>
+</div>
 
     <div *ngIf="showDate" class="slidecontainer">
-
-       
+        <!-- <p class="about" ><small> Search Date</small></p> -->
+        <div class="datePicker">
           <mat-form-field>
-          <input id= "date" matInput [matDatepicker]="picker" placeholder="Choose a date">
+          <input id= "date"  matInput [matDatepicker]="picker" placeholder="Choose a date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-        <button (click)="fetchDate()"  type="button">SEARCH</button>
-     
+      </div>
+        <button (click)="fetchDate()" class="datebutton"   type="button">SEARCH</button>
         <ul> 
-            <li *ngFor="let d of dateResults; let i = index">
-               
-             {{d.question}} ,
-             {{d.answer}},
-             {{d.value}},
-             {{d.airdate}}
-                
+            <li *ngFor="let d of newdateResults; let i = index">
+                <div class="card">
+                    <img src="assets/logo.png" alt="Avatar" style="width:3%">
+                    <div class="container">
+                      <p>{{d.question}}</p>
+                      <h4><b>Ans:  {{d.answer}}, Value: {{d.value}}, Airdate: {{d.airdate}} </b></h4>      
+                  </div>
+                  </div>
             </li>
           </ul>
-        
-      </div>
+         <div class="paginator">
+            <mat-paginator [length]="1"
+            (page)="PageEventdate($event)"
+            [pageSize]="10"
+             [pageSizeOptions]="[5, 10, 25, 50, 100]">
+             </mat-paginator>
+            </div>
+    </div>
 
-      
-       
-</div>
+
+    <div *ngIf="showRandom" >
+        <p class="about" ><small> Search Random Clues</small></p>
+        <button  style="margin-left: 40px;" class="smallbutton" (click)="fetchRandom()" >CLICK ME!</button>
+      <ul> 
+          <li *ngFor="let ran of newranResults; let i = index">
+  
+            <div class="card">
+              <img src="assets/logo.png" alt="Avatar" style="width:3%">
+              <div class="container">
+                <p>{{ran.question}}</p>
+                <h4><b>Ans: {{ran.answer}}, Value: {{ran.value}} </b></h4>
+              </div>
+            </div>
+          </li>
+      </ul>
+    <div class="paginator">
+          <mat-paginator [length]="1"
+           (page)="PageEventran($event)"
+           [pageSize]="10"
+           [pageSizeOptions]="[5, 10, 25, 50, 100]">
+        </mat-paginator>
+      </div>
+    </div>
+    
+
+  

@@ -6,7 +6,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
-import {MatCardModule} from '@angular/material/card';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,7 +29,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
-    MatCardModule
+    MatPaginatorModule
     
   ],
   providers: [AppService],
