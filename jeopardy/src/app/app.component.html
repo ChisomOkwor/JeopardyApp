@@ -1,7 +1,21 @@
+
+<!-- Section For the Top of Screen -->
+
 <div class="topStyle"> 
-<img src="assets/logo.png" ALT="some text" WIDTH=100 HEIGHT=100>
+<img style="display: inline-block" src="assets/logo.png" ALT="some text" WIDTH=100 HEIGHT=100>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Add font awesome icons -->
+    <div class = icons>
+        <a href="#" class="fa fa-facebook"></a>
+        <a href="#" class="fa fa-twitter"></a>
+        <a href="#" class="fa fa-instagram"></a>
+    </div>
 <marquee  style="color: rgb(105, 63, 101)"  behavior="scroll" direction="left"> Smart Trivia gives you a choice! </marquee>
 </div>
+
+
+<!--  Button Triggers function to show corresponding input Field-->
 
 <div class="btn-group" >
   
@@ -11,11 +25,21 @@
   <button (click)="openRan()">Random</button>
 </div>
 
+<!-- Shows when Category button is clicked. -->
   <div *ngIf="showCat" class="example" >
     <p class="about" ><small> Search Categories</small></p>
-      <input id = "searchCat" class="inputBar" type="text" placeholder="Search Keyword..." >
-      <button  class="smallbutton" (click)="fetchData()" >SEARCH</button>
+<!-- Generates the list option of possible categories using *ngFor -->
+    <select  id= "searchCat" class="select-css">
+      <option value="0">--Select Category--</option>
+      <option *ngFor="let title of titles" [value]="title">{{title}}</option>
+    </select>
+
+<!-- Data is fectched from Api when search button is clicked-->
+      <button  class="smallbutton" (click)="fetchCategories()" >SEARCH</button>
+
+<!-- Displays Data using lists and Cards-->
     <ul> 
+      
         <li *ngFor="let cat of newcatResults; let i = index">
 
             <div class="card">
@@ -28,6 +52,7 @@
         </li>
     </ul>
 
+<!-- Angular Material Paginator for displaying Categories-->
     <div class="paginator">
     <mat-paginator [length]="1"
      (page)="PageEventcat($event)"
@@ -36,9 +61,12 @@
   </mat-paginator>
 </div>
 </div>
-  
+
+<!-- Shows when "Difficulty Levl" button is clicked.-->
   <div *ngIf="showDiff">
       <p class="about"><small> Search by Difficulty</small></p>
+
+<!-- User can select Difficulty Level-->
       <select  id= "difficulty" class="select-css">
           <option value="0">--Select Level--</option>
           <option value="100">Level 1</option>
@@ -50,8 +78,11 @@
           <option value="800">Level 8</option>
           <option value="1000">Level 10</option>
         </select>
+
+<!-- Data is gotten from API when search button clicked-->
         <button  class="smallbutton" (click)="fetchDiff()"  type="button">SEARCH</button>
-      
+
+<!-- Displays Data using lists and Cards-->
         <ul> 
             <li *ngFor="let diff of newdiffResults; let i = index">
 
@@ -65,6 +96,7 @@
       
             </li>
           </ul>
+<!-- Paginator for "sesrch by difficulty"-->
           <div class="paginator">
           <mat-paginator [length]="1"
           (page)="PageEventdiff($event)"
@@ -74,27 +106,32 @@
       </div>
 </div>
 
+<!-- Shows when 'Date Aired' button is clicked-->
     <div *ngIf="showDate" class="slidecontainer">
-        <!-- <p class="about" ><small> Search Date</small></p> -->
+         <p class="about" ><small> Search Date</small></p> 
         <div class="datePicker">
           <mat-form-field>
-          <input id= "date"  matInput [matDatepicker]="picker" placeholder="Choose a date">
+          <input id= "date"  matInput [matDatepicker]="picker" placeholder="Aired From:">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
-        <button (click)="fetchDate()" class="datebutton"   type="button">SEARCH</button>
+<!-- Fetches data from API when search button is clicked-->
+        <button (click)="fetchDate()" class="smallbutton"   type="button">SEARCH</button>
+
+<!-- Displays Data using lists and Cards-->
         <ul> 
             <li *ngFor="let d of newdateResults; let i = index">
                 <div class="card">
                     <img src="assets/logo.png" alt="Avatar" style="width:3%">
                     <div class="container">
                       <p>{{d.question}}</p>
-                      <h4><b>Ans:  {{d.answer}}, Value: {{d.value}}, Airdate: {{d.airdate}} </b></h4>      
+                      <h4><b>Ans:  {{d.answer}}, Value: {{d.value}} </b></h4>      
                   </div>
                   </div>
             </li>
           </ul>
+<!-- Paginator for "Search by date" -->
          <div class="paginator">
             <mat-paginator [length]="1"
             (page)="PageEventdate($event)"
@@ -104,10 +141,15 @@
             </div>
     </div>
 
+<!-- Shows when Random Button is Clicked-->
 
     <div *ngIf="showRandom" >
         <p class="about" ><small> Search Random Clues</small></p>
+
+<!-- Fetches Data from API when search button is clicked-->
         <button  style="margin-left: 40px;" class="smallbutton" (click)="fetchRandom()" >CLICK ME!</button>
+
+<!-- Displays Data using lists and Cards-->
       <ul> 
           <li *ngFor="let ran of newranResults; let i = index">
   
@@ -120,6 +162,8 @@
             </div>
           </li>
       </ul>
+
+<!-- Paginator for "Search By Random"-->
     <div class="paginator">
           <mat-paginator [length]="1"
            (page)="PageEventran($event)"
