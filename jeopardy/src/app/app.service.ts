@@ -6,21 +6,22 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AppService{
-   map = new Map();
-   Results;
-   titles = new Array();
-constructor(private http: HttpClient){
-   this.fetchAllCat().toPromise()
-         // .catch(err =>{
 
-         // })
+   map = new Map();    //Hash map
+   Results;
+   titles = new Array(); // Array 
+constructor(private http: HttpClient){
+// Creates a map of categories 
+   this.fetchAllCat().toPromise()  
          .then((Results:any[])=>
         {
            this.Results = Results
           for(var i=0; i < Results.length;i++ ){
             var title = Results[i].title
             var id =  Results[i].id
+// Creates an array of titles  only for category select list(see html)
             this.titles.push(title)
+//Keys are the titles and values are ID's (in the Category API)
             this.map.set(title, id);
           }
     
