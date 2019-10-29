@@ -90,12 +90,6 @@ export class AppComponent {
     this.newdiffResults = this.diffResults.slice(0, event.pageSize);
       
     }
-
-  PageEventcat(event){
-    this.newcatResults = this.catResults.clues.slice(0, event.pageSize);
-      
-    }
-  
     
   title = 'JEOOOPARDY';
   showCat = true;

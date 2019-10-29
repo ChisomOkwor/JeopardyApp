@@ -46,20 +46,12 @@
                 <img src="assets/logo.png" alt="Avatar" style="width:3%">
                 <div class="container">
                   <p> {{cat.question}},</p>
-                  <h4><b>Ans: {{cat.answer}}, Value: {{cat.value}}, </b></h4>
+                  <h4><b>Ans: {{cat.answer}}, Value: {{cat.value}} </b></h4>
                 </div>
               </div>
         </li>
     </ul>
 
-<!-- Angular Material Paginator for displaying Categories-->
-    <div class="paginator">
-    <mat-paginator [length]="1"
-     (page)="PageEventcat($event)"
-     [pageSize]="10"
-     [pageSizeOptions]="[5, 10, 25, 50, 100]">
-  </mat-paginator>
-</div>
 </div>
 
 <!-- Shows when "Difficulty Levl" button is clicked.-->
