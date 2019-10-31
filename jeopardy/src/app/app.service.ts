@@ -37,10 +37,7 @@ fetchAllCat(): Observable<Object>{
 // API function for getting getting all clues in a given category
 fetchCategories(): Observable<Object> {
    var category = document.getElementById("searchCat")['value'];   
-  console.log(category.toString())
-   console.log(this.map.get("a pair of dice, lost"))
-
-      return this.http.get('http://jservice.io/api/category', {params: {'id': this.map.get(category.toString())}});
+      return this.http.get(' http://jservice.io/api/category', {params: {'id': this.map.get(category.toString())}});
       
    }
 
@@ -50,18 +47,46 @@ fetchDiff(): Observable<Object>{
       return this.http.get('http://jservice.io/api/clues', {params: {'value': inputDif.toString()}});
    }
 
-// Funtion for chaning date format
+// Funtion for changing date format
 formatDate(date){
-   var result =  date +  "T12:00:00.000Z";
-    return result
+   if (date.toString().length == 0){
+      return ''
+   }
+   var year = '';
+   var month = '';
+   var day = '';
+   date = date.toString()
+   var counter = date.length - 1;
+// Gets year from my date picker format
+   while(date[counter] != '/'){
+      year = date[counter] + year;
+      counter = counter -1;
+   }
+   console.log(year);
+   counter = counter - 1;
+// Gets day from my date picker format
+   while(date[counter] != '/'){
+      day = date[counter] + day;
+      counter = counter -1;
+   }
+   console.log(day);
+   counter = counter - 1;
+// Gets month from my date picker format
+   while( counter >= 0){
+      month = date[counter] + month;
+      counter = counter - 1;
+   }
+   var newdate = year + '-'+ month+ '-'+ day;
+   console.log(newdate);
+   return newdate;
 }
 
 // API function for getting minimum date
 fetchDate(): Observable<Object>{
    var inputDate = document.getElementById("date")['value'];    
-      return this.http.get('http://jservice.io/api/clues', {params: {'min_date': this.formatDate(inputDate)}});
+   inputDate = this.formatDate(inputDate)
+      return this.http.get(' http://jservice.io/api/clues', {params: {'min_date': inputDate, 'max_date': inputDate}});
    }
-
 
 // API function for getting random clues
 fetchRandom(): Observable<Object>{ 

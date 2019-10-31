@@ -96,9 +96,11 @@ export class AppComponent {
   showDiff = false;
   showDate = false;
   showRandom = false;
+  
 
 
-  // Triggers the Categories button. 
+  // Triggers the Categories button.
+  
   openCat() {
     this.showCat = true;
     this.showDiff = false
