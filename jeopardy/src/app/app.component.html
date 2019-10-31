@@ -45,9 +45,10 @@
             <div class="card">
                 <img src="assets/logo.png" alt="Avatar" style="width:3%">
                 <div class="container">
-                    
-                  <p>{{cat.question}}</p>
-                  <h4><b>Ans: {{cat.answer}}, Value: {{cat.value}} </b></h4>
+<!-- Displays the Question, Answer,and Value  -->
+                  <p> {{cat.question}}</p>
+                  <h4 style="color:rgb(84, 84, 187)" [innerHTML]=" 'Ans: '+ cat.answer  "  ></h4>
+                  <h4 style="color:rgb(84, 84, 187)" [innerHTML]="  ' Value: ' + cat.value "  ></h4>
                 </div>
               </div>
         </li>
@@ -83,7 +84,9 @@
                     <img src="assets/logo.png" alt="Avatar" style="width:3%">
                     <div class="container">
                       <p>{{diff.question}}</p>
-                      <h4><b>Ans: {{diff.answer}}, Value: {{diff.value}} </b></h4>
+<!-- Displays the Question, Answer,and Value  -->
+                      <h4 style="color:rgb(77, 77, 153)" [innerHTML]=" 'Ans: '+ diff.answer " ></h4>
+                      <h4 style="color:rgb(84, 84, 187)" [innerHTML]="' Value: ' + diff.value " ></h4>
                   </div>
                   </div>
       
@@ -119,7 +122,9 @@
                     <img src="assets/logo.png" alt="Avatar" style="width:3%">
                     <div class="container">
                       <p>{{d.question}}</p>
-                      <h4><b>Ans:  {{d.answer}}, Value: {{d.value}} </b></h4>      
+<!-- Displays the Question, Answer,and Value  -->
+                      <h4 style="color:rgb(84, 84, 187)" [innerHTML]=" 'Ans: '+ d.answer " ></h4> 
+                      <h4 style="color:rgb(84, 84, 187)" [innerHTML]="  ' Value: ' + d.value "  ></h4>     
                   </div>
                   </div>
             </li>
@@ -150,7 +155,9 @@
               <img src="assets/logo.png" alt="Avatar" style="width:3%">
               <div class="container">
                 <p>{{ran.question}}</p>
-                <h4><b>Ans: {{ran.answer}}, Value: {{ran.value}} </b></h4>
+<!-- Displays the Question, Answer,and Value  -->
+                <h4 style="color:rgb(92, 92, 168)" [innerHTML]="'Ans: ' + ran.answer  " ></h4>
+                <h4 style="color:rgb(84, 84, 187)" [innerHTML]="' Value: ' + ran.value "  ></h4>
               </div>
             </div>
           </li>
