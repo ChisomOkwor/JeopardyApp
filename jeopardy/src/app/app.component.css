@@ -144,3 +144,7 @@
   top: 0%;
   float: right;
 }
+
+ul{
+list-style-type: none;
+}
