@@ -2,7 +2,7 @@
 <!-- Section For the Top of Screen -->
 
 <div class="topStyle"> 
-<img style="display: inline-block" src="assets/logo.png" ALT="some text" WIDTH=90 HEIGHT=90>
+<img style="display: inline-block" src="assets/logo.png" ALT="some text" WIDTH=100 HEIGHT=80>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Add font awesome icons -->
@@ -116,8 +116,8 @@
         <button (click)="fetchDate()" class="smallbutton"   type="button">SEARCH</button>
 
 <!-- Displays Error when there is no result for date choice -->
-        <div class= "noResult" *ngIf='(newdateResults)?.length === 0'>
-          <h3 style="color: rgb(31, 29, 29)" align="center" > 0 results for this date</h3></div>
+        <div class= "noResult" *ngIf='(newdateResults)?.length == 0'>
+          <h3 style="color: rgb(31, 29, 29)" align="center"> 0 results for this date</h3></div>
 <!-- Displays Data using lists and Cards-->
         <ul> 
             <li *ngFor="let d of newdateResults; let i = index">
@@ -137,7 +137,7 @@
             <mat-paginator [length]="1"
             (page)="PageEventdate($event)"
             [pageSize]="10"
-             [pageSizeOptions]="[5, 15, 25, 30, 50]">
+             [pageSizeOptions]="[5, 15, 25, 50]">
              </mat-paginator>
             </div>
     </div>

@@ -31,20 +31,20 @@ constructor(private http: HttpClient){
 
 // This gets all the 100 categories available in the API
 fetchAllCat(): Observable<Object>{ 
-   return this.http.get('http://jservice.io/api/categories', {params: {'count': "100" }});
+   return this.http.get('https://cors-anywhere.herokuapp.com/http://jservice.io/api/categories', {params: {'count': "100" }});
    }
 
 // API function for getting getting all clues in a given category
 fetchCategories(): Observable<Object> {
    var category = document.getElementById("searchCat")['value'];   
-      return this.http.get(' http://jservice.io/api/category', {params: {'id': this.map.get(category.toString())}});
+      return this.http.get('https://cors-anywhere.herokuapp.com/http://jservice.io/api/category', {params: {'id': this.map.get(category.toString())}});
       
    }
 
 // API function for getting clues by Value(difficulty)
 fetchDiff(): Observable<Object>{
    var inputDif = document.getElementById("difficulty")['value'];   
-      return this.http.get('http://jservice.io/api/clues', {params: {'value': inputDif.toString()}});
+      return this.http.get('https://cors-anywhere.herokuapp.com/http://jservice.io/api/clues', {params: {'value': inputDif.toString()}});
    }
 
 // Funtion for changing date format
@@ -62,14 +62,12 @@ formatDate(date){
       year = date[counter] + year;
       counter = counter -1;
    }
-   console.log(year);
    counter = counter - 1;
 // Gets day from my date picker format
    while(date[counter] != '/'){
       day = date[counter] + day;
       counter = counter -1;
    }
-   console.log(day);
    counter = counter - 1;
 // Gets month from my date picker format
    while( counter >= 0){
@@ -77,7 +75,6 @@ formatDate(date){
       counter = counter - 1;
    }
    var newdate = year + '-'+ month+ '-'+ day;
-   console.log(newdate);
    return newdate;
 }
 
@@ -85,12 +82,14 @@ formatDate(date){
 fetchDate(): Observable<Object>{
    var inputDate = document.getElementById("date")['value'];    
    inputDate = this.formatDate(inputDate)
-      return this.http.get(' http://jservice.io/api/clues', {params: {'min_date': inputDate, 'max_date': inputDate}});
+   if(inputDate.length  != 0){
+      return this.http.get('https://cors-anywhere.herokuapp.com/http://jservice.io/api/clues', {params: {'min_date': inputDate, 'max_date': inputDate}});
    }
+}
 
 // API function for getting random clues
 fetchRandom(): Observable<Object>{ 
-      return this.http.get('http://jservice.io/api/random', {params: {'count':"100" }});
+      return this.http.get('https://cors-anywhere.herokuapp.com/http://jservice.io/api/random', {params: {'count':"100" }});
    }
      
 }
